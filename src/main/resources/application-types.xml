@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="Test" format="json">
+      <types:shape format="weave" example="examples/test.json"><![CDATA[%dw 2.0
+
+type Test = {|
+  contact_email: String, 
+  contact_phone: String
+|} {"example": "{\\\"contact_email\\\":\\\"jagan@gmal.com\\\",\\\"contact_phone\\\":\\\"9642324849\\\"}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="test2" format="json">
+      <types:shape format="weave" example="examples/test2.json"><![CDATA[%dw 2.0
+
+type test2 = {|
+  CONTACT_EMAIL: String, 
+  CONTACT_PHONE: String
+|} {"example": "{\\\"CONTACT_EMAIL\\\":\\\"jagan@gmal.com\\\",\\\"CONTACT_PHONE\\\":\\\"9642324849\\\"}"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#05674ac2-9bf6-4554-b2b1-728bd5b97d03">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="Test"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="test2"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>
